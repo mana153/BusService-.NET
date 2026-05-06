@@ -46,7 +46,7 @@ namespace Bus_Service
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        { 
+        {
             string role = comboBox1.Text;
 
             if (role == "Student")
@@ -68,7 +68,7 @@ namespace Bus_Service
                 textBox3.Enabled = false;
             }
         }
-        
+
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
@@ -87,7 +87,7 @@ namespace Bus_Service
 
         private void button1_Click(object sender, EventArgs e)
         {
-          
+
             if (textBox1.Text == "")
             {
                 MessageBox.Show("Enter Register Number first");
@@ -121,7 +121,7 @@ namespace Bus_Service
                 MessageBox.Show("Your OTP is: " + generatedOTP);
             }
         }
-        
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -198,7 +198,7 @@ namespace Bus_Service
 
                     using (Microsoft.Data.SqlClient.SqlCommand cmd = new Microsoft.Data.SqlClient.SqlCommand(query, con))
                     {
-                        
+
                         cmd.Parameters.AddWithValue("@u", username);
                         cmd.Parameters.AddWithValue("@p", password);
                         cmd.Parameters.AddWithValue("@r", role);
@@ -216,11 +216,22 @@ namespace Bus_Service
                 MessageBox.Show("Registration Successful!");
 
                 generatedOTP = 0;
+
+                Form2 login = new Form2();
+                login.Show();
+                this.Hide();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form2 login = new Form2();
+            login.Show();
+            this.Hide();
         }
     }
 }

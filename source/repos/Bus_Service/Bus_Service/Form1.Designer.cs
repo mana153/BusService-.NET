@@ -40,6 +40,7 @@
             button2 = new Button();
             label6 = new Label();
             groupBox1 = new GroupBox();
+            button3 = new Button();
             label13 = new Label();
             label12 = new Label();
             label11 = new Label();
@@ -144,7 +145,7 @@
             // button2
             // 
             button2.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
-            button2.Location = new Point(480, 478);
+            button2.Location = new Point(384, 478);
             button2.Name = "button2";
             button2.Size = new Size(97, 32);
             button2.TabIndex = 11;
@@ -156,15 +157,16 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(413, 82);
+            label6.Location = new Point(384, 82);
             label6.Name = "label6";
-            label6.Size = new Size(217, 25);
+            label6.Size = new Size(292, 25);
             label6.TabIndex = 12;
-            label6.Text = "User Registration     ";
+            label6.Text = "Create User Registration     ";
             label6.Click += label6_Click;
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(button3);
             groupBox1.Controls.Add(label13);
             groupBox1.Controls.Add(label12);
             groupBox1.Controls.Add(label11);
@@ -192,6 +194,18 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "User Registeration";
             groupBox1.Enter += groupBox1_Enter;
+            // 
+            // button3
+            // 
+            button3.BackColor = Color.Gainsboro;
+            button3.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+            button3.Location = new Point(522, 478);
+            button3.Name = "button3";
+            button3.Size = new Size(97, 32);
+            button3.TabIndex = 23;
+            button3.Text = "Login";
+            button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
             // 
             // label13
             // 
@@ -327,5 +341,6 @@
         private Label label11;
         private Label label10;
         private Label label8;
+        private Button button3;
     }
 }
