@@ -1,6 +1,6 @@
 ﻿namespace Bus_Service
 {
-    partial class Form1
+    partial class Register
     {
         /// <summary>
         ///  Required designer variable.
@@ -301,7 +301,7 @@
             comboBox1.TabIndex = 13;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
-            // Form1
+            // Register
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -309,7 +309,7 @@
             Controls.Add(groupBox1);
             Controls.Add(label9);
             Controls.Add(label2);
-            Name = "Form1";
+            Name = "Register";
             Text = "REGISTRATION";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

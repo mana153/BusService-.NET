@@ -4,11 +4,11 @@ using Microsoft.Data.SqlClient;
 
 namespace Bus_Service
 {
-    public partial class Form1 : Form
+    public partial class Register : Form
     {
         private int generatedOTP;
 
-        public Form1()
+        public Register()
         {
             InitializeComponent();
 
@@ -217,7 +217,7 @@ namespace Bus_Service
 
                 generatedOTP = 0;
 
-                Form2 login = new Form2();
+                Login login = new Login();
                 login.Show();
                 this.Hide();
             }
@@ -229,7 +229,7 @@ namespace Bus_Service
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Form2 login = new Form2();
+            Login login = new Login();
             login.Show();
             this.Hide();
         }
