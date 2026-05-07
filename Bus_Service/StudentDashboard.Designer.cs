@@ -29,18 +29,19 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
+            lblSeat = new Label();
+            lblType = new Label();
+            lblDept = new Label();
+            lblName = new Label();
             label4 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
             label5 = new Label();
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
-            lblName = new Label();
-            lblDept = new Label();
-            lblType = new Label();
-            lblSeat = new Label();
+            lblStatus = new Label();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -62,23 +63,46 @@
             groupBox1.Text = "BOOKING DETAILS";
             groupBox1.Enter += groupBox1_Enter;
             // 
-            // label1
+            // lblSeat
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(92, 36);
-            label1.Name = "label1";
-            label1.Size = new Size(60, 20);
-            label1.TabIndex = 0;
-            label1.Text = "Name : ";
+            lblSeat.AutoSize = true;
+            lblSeat.Location = new Point(567, 83);
+            lblSeat.Name = "lblSeat";
+            lblSeat.Size = new Size(0, 20);
+            lblSeat.TabIndex = 7;
             // 
-            // label2
+            // lblType
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(421, 36);
-            label2.Name = "label2";
-            label2.Size = new Size(100, 20);
-            label2.TabIndex = 1;
-            label2.Text = "Department : ";
+            lblType.AutoSize = true;
+            lblType.Location = new Point(202, 92);
+            lblType.Name = "lblType";
+            lblType.Size = new Size(0, 20);
+            lblType.TabIndex = 6;
+            // 
+            // lblDept
+            // 
+            lblDept.AutoSize = true;
+            lblDept.Location = new Point(567, 36);
+            lblDept.Name = "lblDept";
+            lblDept.Size = new Size(0, 20);
+            lblDept.TabIndex = 5;
+            // 
+            // lblName
+            // 
+            lblName.AutoSize = true;
+            lblName.Location = new Point(202, 36);
+            lblName.Name = "lblName";
+            lblName.Size = new Size(0, 20);
+            lblName.TabIndex = 4;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(414, 83);
+            label4.Name = "label4";
+            label4.Size = new Size(107, 20);
+            label4.TabIndex = 3;
+            label4.Text = "Seat Number : ";
             // 
             // label3
             // 
@@ -89,14 +113,23 @@
             label3.TabIndex = 2;
             label3.Text = "Booking Type :";
             // 
-            // label4
+            // label2
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(414, 83);
-            label4.Name = "label4";
-            label4.Size = new Size(107, 20);
-            label4.TabIndex = 3;
-            label4.Text = "Seat Number : ";
+            label2.AutoSize = true;
+            label2.Location = new Point(421, 36);
+            label2.Name = "label2";
+            label2.Size = new Size(100, 20);
+            label2.TabIndex = 1;
+            label2.Text = "Department : ";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(92, 36);
+            label1.Name = "label1";
+            label1.Size = new Size(60, 20);
+            label1.TabIndex = 0;
+            label1.Text = "Name : ";
             // 
             // label5
             // 
@@ -115,6 +148,7 @@
             button1.TabIndex = 5;
             button1.Text = "View Status";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -134,44 +168,22 @@
             button3.TabIndex = 7;
             button3.Text = "Logout";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
-            // lblName
+            // lblStatus
             // 
-            lblName.AutoSize = true;
-            lblName.Location = new Point(202, 36);
-            lblName.Name = "lblName";
-            lblName.Size = new Size(0, 20);
-            lblName.TabIndex = 4;
-            // 
-            // lblDept
-            // 
-            lblDept.AutoSize = true;
-            lblDept.Location = new Point(567, 36);
-            lblDept.Name = "lblDept";
-            lblDept.Size = new Size(0, 20);
-            lblDept.TabIndex = 5;
-            // 
-            // lblType
-            // 
-            lblType.AutoSize = true;
-            lblType.Location = new Point(202, 92);
-            lblType.Name = "lblType";
-            lblType.Size = new Size(0, 20);
-            lblType.TabIndex = 6;
-            // 
-            // lblSeat
-            // 
-            lblSeat.AutoSize = true;
-            lblSeat.Location = new Point(567, 83);
-            lblSeat.Name = "lblSeat";
-            lblSeat.Size = new Size(0, 20);
-            lblSeat.TabIndex = 7;
+            lblStatus.AutoSize = true;
+            lblStatus.Location = new Point(348, 184);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(0, 20);
+            lblStatus.TabIndex = 8;
             // 
             // StudentDashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblStatus);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -200,5 +212,6 @@
         private Label lblType;
         private Label lblDept;
         private Label lblName;
+        private Label lblStatus;
     }
 }

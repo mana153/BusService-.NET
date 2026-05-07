@@ -32,13 +32,13 @@
             radioButton2 = new RadioButton();
             radioButton1 = new RadioButton();
             groupBox2 = new GroupBox();
-            label4 = new Label();
+            label5 = new Label();
+            comboBox1 = new ComboBox();
+            textBox1 = new TextBox();
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            textBox1 = new TextBox();
-            comboBox1 = new ComboBox();
-            label5 = new Label();
+            label4 = new Label();
             checkBox1 = new CheckBox();
             button1 = new Button();
             label6 = new Label();
@@ -94,14 +94,30 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "STUDENT DETAILS";
             // 
-            // label4
+            // label5
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(227, 392);
-            label4.Name = "label4";
-            label4.Size = new Size(121, 20);
-            label4.TabIndex = 3;
-            label4.Text = "Available Seats : ";
+            label5.AutoSize = true;
+            label5.Location = new Point(354, 129);
+            label5.Name = "label5";
+            label5.Size = new Size(50, 20);
+            label5.TabIndex = 5;
+            label5.Text = "label5";
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "SCIENCE", "BBA", "B.COM", "LAW", "MBA", "MSC - DS" });
+            comboBox1.Location = new Point(354, 90);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(151, 28);
+            comboBox1.TabIndex = 4;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(354, 51);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(151, 27);
+            textBox1.TabIndex = 3;
             // 
             // label3
             // 
@@ -130,29 +146,14 @@
             label1.TabIndex = 0;
             label1.Text = "Name";
             // 
-            // textBox1
+            // label4
             // 
-            textBox1.Location = new Point(354, 51);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(151, 27);
-            textBox1.TabIndex = 3;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(354, 90);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 4;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(354, 129);
-            label5.Name = "label5";
-            label5.Size = new Size(50, 20);
-            label5.TabIndex = 5;
-            label5.Text = "label5";
+            label4.AutoSize = true;
+            label4.Location = new Point(227, 392);
+            label4.Name = "label4";
+            label4.Size = new Size(121, 20);
+            label4.TabIndex = 3;
+            label4.Text = "Available Seats : ";
             // 
             // checkBox1
             // 
