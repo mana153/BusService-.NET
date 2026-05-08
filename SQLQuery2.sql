@@ -1,0 +1,1 @@
+﻿INSERT INTO Users (Username, Password, Role, Department) VALUES ('admin', 'admin123', 'Admin', 'N/A');
