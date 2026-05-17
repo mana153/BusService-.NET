@@ -265,7 +265,7 @@
             // 
             comboBox2.Font = new Font("Times New Roman", 12F);
             comboBox2.FormattingEnabled = true;
-            comboBox2.Items.AddRange(new object[] { "SCIENCE", "BBA", "B.COM", "LAW", "MBA", "MSC - DS" });
+            comboBox2.Items.AddRange(new object[] { "SCIENCE", "BBA", "B.COM", "LAW", "MBA", "MSC - DS", "Administration" });
             comboBox2.Location = new Point(591, 309);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(151, 30);

@@ -18,72 +18,90 @@ namespace Bus_Service
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string username = textBox1.Text.Trim();
+            string password = textBox2.Text.Trim();
 
-            string username = textBox1.Text;
-            string password = textBox2.Text;
-
-            if (username == "" || password == "")
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Enter username and password");
+                MessageBox.Show("Please enter both username and password");
                 return;
             }
 
             try
             {
-                using (Microsoft.Data.SqlClient.SqlConnection con = new Microsoft.Data.SqlClient.SqlConnection(
-            @"Data Source=(LocalDB)\MSSQLLocalDB;
-  AttachDbFilename=C:\Users\Mana\source\repos\Bus_Service\Bus_Service\Database1.mdf;
-  Integrated Security=True"))
+                using (SqlConnection con = new SqlConnection(AppSettings.SqlConnectionString))
                 {
                     con.Open();
-
-                    string query = "SELECT UserID, Role FROM Users WHERE Username=@u AND Password=@p";
+                    string query = "SELECT UserID, Role, Department FROM Users WHERE Username=@username AND Password=@password";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        cmd.Parameters.AddWithValue("@u", username);
-                        cmd.Parameters.AddWithValue("@p", password);
+                        cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@password", password);
 
                         SqlDataReader reader = cmd.ExecuteReader();
 
                         if (!reader.Read())
                         {
-                            MessageBox.Show("Invalid credentials");
+                            MessageBox.Show("Invalid username or password");
+                            textBox2.Clear();
                             return;
                         }
 
                         int userId = Convert.ToInt32(reader["UserID"]);
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-                        string role = reader["Role"].ToString();
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+                        string role = reader["Role"]?.ToString() ?? "";
+                        string department = reader["Department"]?.ToString() ?? "";
 
-                        MessageBox.Show("Login Successful! Role: " + role);
+                        reader.Close();
+
+                        bool formOpened = false;
 
                         if (role == "Admin")
                         {
-                            Admin admin = new Admin();
+                            AdminDashboard admin = new AdminDashboard(userId);
                             admin.Show();
+                            formOpened = true;
                         }
                         else if (role == "Student")
                         {
                             StudentForm student = new StudentForm(userId);
                             student.Show();
+                            formOpened = true;
+                        }
+                        else if (role == "HOD")
+                        {
+                            HODDashboardForm hod = new HODDashboardForm();
+                            hod.Show();
+                            formOpened = true;
                         }
                         else if (role == "Volunteer")
                         {
                             VolunteerForm volunteer = new VolunteerForm();
                             volunteer.Show();
+                            formOpened = true;
                         }
 
-                        this.Hide();
+                        if (formOpened)
+                        {
+                            this.Hide();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Unknown role type: " + role);
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Login Error: " + ex.Message);
             }
-        
-    }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Register signupForm = new Register();
+            signupForm.ShowDialog();
+        }
     }
 }

@@ -11,7 +11,11 @@ namespace Bus_Service
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Register());
+
+            // Initialize database schema and tables
+            DatabaseInitializer.Initialize();
+
+            Application.Run(new Login());
         }
     }
 }

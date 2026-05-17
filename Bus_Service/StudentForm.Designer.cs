@@ -173,7 +173,18 @@
             button1.TabIndex = 5;
             button1.Text = "Book Seat";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            button1.Click += new System.EventHandler(this.btnBookSeat_Click);
+            // 
+            // buttonOneWayRequest
+            // 
+            this.buttonOneWayRequest = new System.Windows.Forms.Button();
+            this.buttonOneWayRequest.Location = new Point(450, 434);
+            this.buttonOneWayRequest.Name = "buttonOneWayRequest";
+            this.buttonOneWayRequest.Size = new Size(120, 29);
+            this.buttonOneWayRequest.TabIndex = 7;
+            this.buttonOneWayRequest.Text = "One-Way Request";
+            this.buttonOneWayRequest.UseVisualStyleBackColor = true;
+            // Placeholder: Can be wired up when OneWayRequestForm is available
             // 
             // label6
             // 
@@ -191,6 +202,7 @@
             ClientSize = new Size(781, 530);
             Controls.Add(label6);
             Controls.Add(button1);
+            Controls.Add(this.buttonOneWayRequest);
             Controls.Add(checkBox1);
             Controls.Add(label4);
             Controls.Add(groupBox2);
@@ -221,5 +233,6 @@
         private CheckBox checkBox1;
         private Button button1;
         private Label label6;
+        private Button buttonOneWayRequest;
     }
 }

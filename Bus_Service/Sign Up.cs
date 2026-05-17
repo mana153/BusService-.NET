@@ -55,6 +55,18 @@ namespace Bus_Service
                 button1.Enabled = false;    // OTP
                 textBox3.Enabled = false;
             }
+            else if (role == "Admin")
+            {
+                comboBox2.Enabled = true;   // Department - Admin can select department
+                button1.Enabled = false;    // OTP not needed
+                textBox3.Enabled = false;
+            }
+            else if (role == "HOD")
+            {
+                comboBox2.Enabled = true;   // Department
+                button1.Enabled = false;    // OTP
+                textBox3.Enabled = false;
+            }
             else if (role == "Volunteer")
             {
                 comboBox2.Enabled = false;
@@ -102,7 +114,6 @@ namespace Bus_Service
             string password = textBox2.Text;
             string department = comboBox2.Text;
 
-
             // 🔴 Basic validation
             if (username == "" || password == "" || role == "")
             {
@@ -110,10 +121,13 @@ namespace Bus_Service
                 return;
             }
 
+            // 🎓 Admin signup is now enabled - department is optional for Admin
             if (role == "Admin")
             {
-                MessageBox.Show("Admin cannot register. Contact system administrator.");
-                return;
+                if (department == "")
+                {
+                    department = "Administration"; // Default department for Admin
+                }
             }
 
             // 🎓 Student validation
@@ -141,14 +155,11 @@ namespace Bus_Service
             }
             try
             {
-                using (Microsoft.Data.SqlClient.SqlConnection con = new Microsoft.Data.SqlClient.SqlConnection(
-             @"Data Source=(LocalDB)\MSSQLLocalDB;
-  AttachDbFilename=C:\Users\Mana\source\repos\Bus_Service\Bus_Service\Database1.mdf;
-  Integrated Security=True"))
+                using (Microsoft.Data.SqlClient.SqlConnection con = new Microsoft.Data.SqlClient.SqlConnection(AppSettings.SqlConnectionString))
                 {
                     con.Open();
 
-                    // 🔍 CHECK IF USER EXISTS (ADD HERE)
+                    // 🔍 CHECK IF USER EXISTS
                     string checkQuery = "SELECT COUNT(*) FROM Users WHERE Username=@u";
 
                     using (Microsoft.Data.SqlClient.SqlCommand checkCmd =
@@ -165,38 +176,32 @@ namespace Bus_Service
                         }
                     }
 
-                    // INSERT USER
+                    // INSERT USER - Basic insert that works with core Users table schema
                     string query = "INSERT INTO Users (Username, Password, Role, Department) VALUES (@u, @p, @r, @d)";
 
                     using (Microsoft.Data.SqlClient.SqlCommand cmd = new Microsoft.Data.SqlClient.SqlCommand(query, con))
                     {
-
                         cmd.Parameters.AddWithValue("@u", username);
                         cmd.Parameters.AddWithValue("@p", password);
                         cmd.Parameters.AddWithValue("@r", role);
 
-                        if (role == "Student")
+                        if (role == "Student" || role == "Admin" || role == "HOD")
                             cmd.Parameters.AddWithValue("@d", department);
                         else
-                            cmd.Parameters.AddWithValue("@d", "N/A");
-
+                            cmd.Parameters.AddWithValue("@d", role);
 
                         cmd.ExecuteNonQuery();
+
                         if (role == "Volunteer")
                         {
-                            string volunteerQuery =
-                                "INSERT INTO AllowedVolunteers (RegNo, Name, Department) VALUES (@r, @n, @d)";
+                            // Insert into AllowedVolunteers table
+                            string volunteerQuery = "INSERT INTO AllowedVolunteers (RegNo, Name, Department) VALUES (@r, @n, @d)";
 
-                            using (SqlCommand volunteerCmd =
-                                   new SqlCommand(volunteerQuery, con))
+                            using (SqlCommand volunteerCmd = new SqlCommand(volunteerQuery, con))
                             {
                                 volunteerCmd.Parameters.AddWithValue("@r", username);
-
-                                // You can change these later
                                 volunteerCmd.Parameters.AddWithValue("@n", username);
-
                                 volunteerCmd.Parameters.AddWithValue("@d", "Volunteer");
-
                                 volunteerCmd.ExecuteNonQuery();
                             }
                         }
@@ -204,7 +209,6 @@ namespace Bus_Service
                 }
 
                 MessageBox.Show("Registration Successful!");
-
                 generatedOTP = 0;
 
                 Login login = new Login();

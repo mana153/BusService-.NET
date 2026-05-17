@@ -30,6 +30,7 @@
         {
             groupBox1 = new GroupBox();
             button1 = new Button();
+            button2 = new Button();
             textBox2 = new TextBox();
             textBox1 = new TextBox();
             label2 = new Label();
@@ -39,6 +40,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(button2);
             groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(textBox2);
             groupBox1.Controls.Add(textBox1);
@@ -62,6 +64,17 @@
             button1.Text = "Login";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
+            // 
+            // button2
+            // 
+            button2.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+            button2.Location = new Point(284, 350);
+            button2.Name = "button2";
+            button2.Size = new Size(118, 43);
+            button2.TabIndex = 5;
+            button2.Text = "Sign Up";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // textBox2
             // 
@@ -116,6 +129,7 @@
 
         private GroupBox groupBox1;
         private Button button1;
+        private Button button2;
         private TextBox textBox2;
         private TextBox textBox1;
         private Label label2;

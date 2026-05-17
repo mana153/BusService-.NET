@@ -11,87 +11,146 @@ namespace Bus_Service
 {
     public partial class StudentDashboard : Form
     {
-
-        int userID;
+        private int _userID;
+        private DatabaseHelper _dbHelper;
+        private string _connectionString = AppSettings.SqlConnectionString;
 
         public StudentDashboard()
         {
             InitializeComponent();
         }
 
-        public StudentDashboard(int UserID)
+        public StudentDashboard(int userID)
         {
             InitializeComponent();
-            userID = UserID;
+            _userID = userID;
+            _dbHelper = new DatabaseHelper(_connectionString);
         }
 
-
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void StudentDashboard_Load(object sender, EventArgs e)
         {
-
+            // Apply styling
+            this.BackColor = Color.White;
+            this.Font = new Font("Segoe UI", 10);
+            LoadStudentInfo();
+            LoadUpcomingTravels();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void LoadStudentInfo()
         {
-            using (Microsoft.Data.SqlClient.SqlConnection con = new Microsoft.Data.SqlClient.SqlConnection(
-  @"Data Source=(LocalDB)\MSSQLLocalDB;
-AttachDbFilename=C:\Users\Mana\source\repos\Bus_Service\Bus_Service\Database1.mdf;
-Integrated Security=True"))
+            try
             {
-                con.Open();
-                SqlCommand cmd = new SqlCommand(
-                    "SELECT u.Name, u.Department, b.BookingType, b.SeatNumber, b.Status " +
-                    "FROM Bookings b INNER JOIN Users u ON b.UserID = u.UserID " +
-                    "WHERE b.UserID = @UserID", con);
-
-                cmd.Parameters.AddWithValue("@UserID", userID);
-
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read())
+                using (SqlConnection con = new SqlConnection(_connectionString))
                 {
-                    lblName.Text = dr["Name"].ToString();
-                    lblDept.Text = dr["Department"].ToString();
-                    lblType.Text = dr["BookingType"].ToString();
-                    lblSeat.Text = dr["SeatNumber"].ToString();
-                    lblStatus.Text = dr["Status"].ToString();
-                }
-                else
-                {
-                    MessageBox.Show("No booking found.");
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand(
+                        "SELECT Username, Department FROM Users WHERE UserID = @UserID", con);
+                    cmd.Parameters.AddWithValue("@UserID", _userID);
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        lblName.Text = "Name: " + dr["Username"].ToString();
+                        lblDept.Text = "Department: " + dr["Department"].ToString();
+                    }
                 }
             }
-        }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            using (Microsoft.Data.SqlClient.SqlConnection con = new Microsoft.Data.SqlClient.SqlConnection(
-  @"Data Source=(LocalDB)\MSSQLLocalDB;
-AttachDbFilename=C:\Users\Mana\source\repos\Bus_Service\Bus_Service\Database1.mdf;
-Integrated Security=True"))
+            catch (Exception ex)
             {
-                con.Open();
-                SqlCommand cmd = new SqlCommand(
-                    "UPDATE Bookings SET Status = 'Cancelled' WHERE UserID = @UserID", con);
-
-                cmd.Parameters.AddWithValue("@UserID", userID);
-
-                int rows = cmd.ExecuteNonQuery();
-                if (rows > 0)
-                {
-                    lblStatus.Text = "Cancelled";
-                    MessageBox.Show("Booking cancelled successfully.");
-                }
-                else
-                {
-                    MessageBox.Show("No booking to cancel.");
-                }
+                MessageBox.Show("Error loading student info: " + ex.Message);
             }
         }
 
-            private void button3_Click(object sender, EventArgs e)
+        private void LoadUpcomingTravels()
+        {
+            try
+            {
+                DataTable travels = _dbHelper.GetUpcomingTravels();
+                dataGridViewUpcomingTravels.DataSource = travels;
+                dataGridViewUpcomingTravels.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading travels: " + ex.Message);
+            }
+        }
+
+        private void LoadStudentBookings()
+        {
+            try
+            {
+                DataTable bookings = _dbHelper.GetStudentBookings(_userID);
+                dataGridViewMyBookings.DataSource = bookings;
+                dataGridViewMyBookings.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading bookings: " + ex.Message);
+            }
+        }
+
+        private void btnBookTravel_Click(object sender, EventArgs e)
+        {
+            StudentBookingForm bookingForm = new StudentBookingForm(_userID);
+            bookingForm.ShowDialog();
+            LoadStudentBookings();
+        }
+
+        private void btnCancelBooking_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridViewMyBookings.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Please select a booking to cancel");
+                    return;
+                }
+
+                int bookingId = (int)dataGridViewMyBookings.SelectedRows[0].Cells["BookingID"].Value;
+                int travelId = (int)dataGridViewMyBookings.SelectedRows[0].Cells["TravelID"].Value;
+
+                DialogResult result = MessageBox.Show("Are you sure you want to cancel this booking?", "Confirm", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    if (_dbHelper.CancelStudentBooking(bookingId, travelId))
+                    {
+                        MessageBox.Show("Booking cancelled successfully");
+                        LoadStudentBookings();
+                        LoadUpcomingTravels();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
         {
             this.Hide();
             Login login = new Login();
             login.Show();
-             }
+        }
+
+        private void StudentDashboard_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Return to login instead of exiting application
+            DialogResult result = MessageBox.Show("Are you sure you want to logout?", "Confirm Logout", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                this.Hide();
+                Login login = new Login();
+                login.Show();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+        }
     }
 }
