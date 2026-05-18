@@ -1,0 +1,40 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Mana\\source\\repos\\BUS\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6C299894-C79C-4767-A4E9-06BEED80DE7F}|BUS\\BUS.csproj|c:\\users\\mana\\source\\repos\\bus\\bus\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{6C299894-C79C-4767-A4E9-06BEED80DE7F}|BUS\\BUS.csproj|solutionrelative:bus\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Mana\\source\\repos\\BUS\\BUS\\Form1.cs",
+              "RelativeDocumentMoniker": "BUS\\Form1.cs",
+              "ToolTip": "C:\\Users\\Mana\\source\\repos\\BUS\\BUS\\Form1.cs [Design]",
+              "RelativeToolTip": "BUS\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-05T09:38:35.808Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.1" />
+  </ItemGroup>
+
+  <!-- Exclude the /Forms draft subdirectory - it uses a different base class and namespace -->
+  <ItemGroup>
+    <Compile Remove="Forms\**\*" />
+    <EmbeddedResource Remove="Forms\**\*" />
+    <None Remove="Forms\**\*" />
+  </ItemGroup>
+
+  <!-- Also exclude stray helper files that won't compile standalone -->
+  <ItemGroup>
+    <Compile Remove="QUICK_START_GUIDE.cs" />
+    <Compile Remove="SYSTEM_INTEGRATION_FIXES.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Login -->
+    <Compile Update="Login.cs">            <SubType>Form</SubType></Compile>
+    <Compile Update="Login.Designer.cs">   <DependentUpon>Login.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Login.resx"> <DependentUpon>Login.cs</DependentUpon></EmbeddedResource>
+
+    <!-- Sign Up -->
+    <Compile Update="Sign Up.cs">              <SubType>Form</SubType></Compile>
+    <Compile Update="Sign Up.Designer.cs">     <DependentUpon>Sign Up.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Sign Up.resx">   <DependentUpon>Sign Up.cs</DependentUpon></EmbeddedResource>
+
+    <!-- Admin Dashboard -->
+    <Compile Update="AdminDashboard.cs">             <SubType>Form</SubType></Compile>
+    <Compile Update="AdminDashboard.Designer.cs">    <DependentUpon>AdminDashboard.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="AdminDashboard.resx">  <DependentUpon>AdminDashboard.cs</DependentUpon></EmbeddedResource>
+
+    <!-- Admin Form (Travel CRUD) -->
+    <Compile Update="AdminForm.cs">            <SubType>Form</SubType></Compile>
+    <Compile Update="AdminForm.Designer.cs">   <DependentUpon>AdminForm.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="AdminForm.resx"> <DependentUpon>AdminForm.cs</DependentUpon></EmbeddedResource>
+
+    <!-- Admin One-Way Requests -->
+    <Compile Update="AdminOneWayRequestForm.cs">            <SubType>Form</SubType></Compile>
+    <Compile Update="AdminOneWayRequestForm.Designer.cs">   <DependentUpon>AdminOneWayRequestForm.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="AdminOneWayRequestForm.resx"> <DependentUpon>AdminOneWayRequestForm.cs</DependentUpon></EmbeddedResource>
+
+    <!-- Admin Bookings View -->
+    <Compile Update="AdminBookingsForm.cs">          <SubType>Form</SubType></Compile>
+    <Compile Update="AdminBookingsForm.Designer.cs"> <DependentUpon>AdminBookingsForm.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="AdminBookingsForm.resx"> <DependentUpon>AdminBookingsForm.cs</DependentUpon></EmbeddedResource>
+
+    <!-- Admin Cancellations View -->
+    <Compile Update="AdminCancellationsForm.cs">          <SubType>Form</SubType></Compile>
+    <Compile Update="AdminCancellationsForm.Designer.cs"> <DependentUpon>AdminCancellationsForm.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="AdminCancellationsForm.resx"> <DependentUpon>AdminCancellationsForm.cs</DependentUpon></EmbeddedResource>
+
+    <!-- Attendance -->
+    <Compile Update="AttendanceForm.cs">            <SubType>Form</SubType></Compile>
+    <Compile Update="AttendanceForm.Designer.cs">   <DependentUpon>AttendanceForm.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="AttendanceForm.resx"> <DependentUpon>AttendanceForm.cs</DependentUpon></EmbeddedResource>
+
+    <!-- HOD Dashboard -->
+    <Compile Update="HODDashboardForm.cs">            <SubType>Form</SubType></Compile>
+    <Compile Update="HODDashboardForm.Designer.cs">   <DependentUpon>HODDashboardForm.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="HODDashboardForm.resx"> <DependentUpon>HODDashboardForm.cs</DependentUpon></EmbeddedResource>
+
+    <!-- Notifications -->
+    <Compile Update="NotificationForm.cs">            <SubType>Form</SubType></Compile>
+    <Compile Update="NotificationForm.Designer.cs">   <DependentUpon>NotificationForm.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="NotificationForm.resx"> <DependentUpon>NotificationForm.cs</DependentUpon></EmbeddedResource>
+
+    <!-- One-Way Request (Student) -->
+    <Compile Update="OneWayRequestForm.cs">            <SubType>Form</SubType></Compile>
+    <Compile Update="OneWayRequestForm.Designer.cs">   <DependentUpon>OneWayRequestForm.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="OneWayRequestForm.resx"> <DependentUpon>OneWayRequestForm.cs</DependentUpon></EmbeddedResource>
+
+    <!-- Cancel Booking (Student) -->
+    <Compile Update="CancelBookingForm.cs">          <SubType>Form</SubType></Compile>
+    <Compile Update="CancelBookingForm.Designer.cs"> <DependentUpon>CancelBookingForm.cs</DependentUpon></Compile>
+
+    <!-- Student Booking (Two-Way) -->
+    <Compile Update="StudentBookingForm.cs">            <SubType>Form</SubType></Compile>
+    <Compile Update="StudentBookingForm.Designer.cs">   <DependentUpon>StudentBookingForm.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="StudentBookingForm.resx"> <DependentUpon>StudentBookingForm.cs</DependentUpon></EmbeddedResource>
+
+    <!-- Student Dashboard -->
+    <Compile Update="StudentDashboard.cs">            <SubType>Form</SubType></Compile>
+    <Compile Update="StudentDashboard.Designer.cs">   <DependentUpon>StudentDashboard.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="StudentDashboard.resx"> <DependentUpon>StudentDashboard.cs</DependentUpon></EmbeddedResource>
+
+    <!-- Student Portal Form -->
+    <Compile Update="StudentForm.cs">            <SubType>Form</SubType></Compile>
+    <Compile Update="StudentForm.Designer.cs">   <DependentUpon>StudentForm.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="StudentForm.resx"> <DependentUpon>StudentForm.cs</DependentUpon></EmbeddedResource>
+
+    <!-- Volunteer -->
+    <Compile Update="VolunteerForm.cs">            <SubType>Form</SubType></Compile>
+    <Compile Update="VolunteerForm.Designer.cs">   <DependentUpon>VolunteerForm.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="VolunteerForm.resx"> <DependentUpon>VolunteerForm.cs</DependentUpon></EmbeddedResource>
+  </ItemGroup>
+
+</Project>
